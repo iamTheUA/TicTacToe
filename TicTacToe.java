@@ -1,11 +1,13 @@
 package TicTacToe;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
 
 	static int uSign, cSign;
-	static int turn = 9;
+	static int turnLeft = 9;
+	static boolean turn= true;
 	static int board[][] = new int[3][3];
 
 	public static void main(String[] args) {
@@ -15,6 +17,7 @@ public class TicTacToe {
 		showBoard();
 		selectPosition();
 		showBoard();
+		turn=toss();
 	}
 
 	public static void createBoard() {
@@ -68,5 +71,15 @@ public class TicTacToe {
 			return ' ';
 		}
 		return (a == 1) ? 'X' : 'O';
+	}
+	
+	public static boolean toss() {
+		Random rand = new Random();
+		int num= rand.nextInt(2);
+		if(num==1) {
+			return true;
+		}
+		else 
+			return false;
 	}
 }
