@@ -7,7 +7,7 @@ public class TicTacToe {
 
 	static int uSign, cSign;
 	static int turnLeft = 9;
-	static boolean turn= true;
+	static boolean turn, toPlay = true;
 	static int board[][] = new int[3][3];
 
 	public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class TicTacToe {
 		showBoard();
 		selectPosition();
 		showBoard();
-		turn=toss();
+		turn = toss();
 	}
 
 	public static void createBoard() {
@@ -72,14 +72,72 @@ public class TicTacToe {
 		}
 		return (a == 1) ? 'X' : 'O';
 	}
-	
+
 	public static boolean toss() {
 		Random rand = new Random();
-		int num= rand.nextInt(2);
-		if(num==1) {
+		int num = rand.nextInt(2);
+		if (num == 1) {
 			return true;
-		}
-		else 
+		} else
 			return false;
+	}
+
+	public static void checkWin() {
+		if (board[0][0] == board[0][1] && board[0][0] == board[0][2]) {
+			if (board[0][0] == uSign) {
+				playerWon();
+			} else
+				CompWon();
+		} else if (board[1][0] == board[1][1] && board[1][0] == board[1][2]) {
+			if (board[1][0] == uSign) {
+				playerWon();
+			} else
+				CompWon();
+		} else if (board[2][0] == board[2][1] && board[2][0] == board[2][2]) {
+			if (board[2][0] == uSign) {
+				playerWon();
+			} else
+				CompWon();
+		} else if (board[0][0] == board[1][0] && board[0][0] == board[2][0]) {
+			if (board[0][0] == uSign) {
+				playerWon();
+			} else
+				CompWon();
+		} else if (board[1][1] == board[0][1] && board[0][1] == board[2][1]) {
+			if (board[1][1] == uSign) {
+				playerWon();
+			} else
+				CompWon();
+		} else if (board[0][2] == board[1][2] && board[0][2] == board[2][2]) {
+			if (board[0][2] == uSign) {
+				playerWon();
+			} else
+				CompWon();
+		} else if (board[0][0] == board[1][1] && board[0][0] == board[2][2]) {
+			if (board[0][0] == uSign) {
+				playerWon();
+			} else
+				CompWon();
+		} else if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+			if (board[0][2] == uSign) {
+				playerWon();
+			} else
+				CompWon();
+		}
+
+		if (turnLeft == 0) {
+			System.out.println("It's Tie");
+			toPlay = false;
+		}
+	}
+
+	public static void playerWon() {
+		System.out.println("You Won!!");
+		toPlay = false;
+	}
+
+	public static void CompWon() {
+		System.out.println("Computer Won!!");
+		toPlay = false;
 	}
 }
