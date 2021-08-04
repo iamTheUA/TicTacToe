@@ -83,6 +83,7 @@ public class TicTacToe {
 	}
 
 	public static void checkWin() {
+
 		if (board[0][0] == board[0][1] && board[0][0] == board[0][2]) {
 			if (board[0][0] == uSign) {
 				playerWon();
@@ -139,5 +140,59 @@ public class TicTacToe {
 	public static void CompWon() {
 		System.out.println("Computer Won!!");
 		toPlay = false;
+	}
+
+	public static void compMove() {
+
+		if (board[0][0] == board[0][1] && board[0][0] == cSign && board[0][2] == 0) {
+			board[0][2] = cSign;
+		} else if (board[0][0] == board[0][2] && board[0][0] == cSign && board[0][1] == 0) {
+			board[0][1] = cSign;
+		} else if (board[0][1] == board[0][2] && board[0][1] == cSign && board[0][0] == 0) {
+			board[0][0] = cSign;
+		} else if (board[1][0] == board[1][1] && board[1][0] == cSign && board[0][2] == 0) {
+			board[0][2] = cSign;
+		} else if (board[1][0] == board[1][2] && board[1][0] == cSign && board[1][1] == 0) {
+			board[1][1] = cSign;
+		} else if (board[1][1] == board[1][2] && board[1][1] == cSign && board[1][0] == 0) {
+			board[1][0] = cSign;
+		} else if (board[2][0] == board[2][1] && board[2][0] == cSign && board[2][2] == 0) {
+			board[2][2] = cSign;
+		} else if (board[2][0] == board[2][2] && board[2][0] == cSign && board[2][1] == 0) {
+			board[2][1] = cSign;
+		} else if (board[2][1] == board[2][2] && board[2][1] == cSign && board[2][0] == 0) {
+			board[2][0] = cSign;
+		} else if (board[0][0] == board[1][0] && board[0][0] == cSign && board[2][0] == 0) {
+			board[2][0] = cSign;
+		} else if (board[0][0] == board[2][0] && board[0][0] == cSign && board[1][0] == 0) {
+			board[1][0] = cSign;
+		} else if (board[2][0] == board[1][0] && board[1][0] == cSign && board[0][0] == 0) {
+			board[0][0] = cSign;
+		} else if (board[0][1] == board[1][1] && board[0][1] == cSign && board[2][1] == 0) {
+			board[2][1] = cSign;
+		} else if (board[0][1] == board[2][1] && board[0][1] == cSign && board[1][1] == 0) {
+			board[1][1] = cSign;
+		} else if (board[2][1] == board[1][1] && board[1][1] == cSign && board[0][1] == 0) {
+			board[0][1] = cSign;
+		} else if (board[0][2] == board[1][2] && board[0][2] == cSign && board[2][2] == 0) {
+			board[2][2] = cSign;
+		} else if (board[0][2] == board[2][2] && board[0][2] == cSign && board[1][2] == 0) {
+			board[1][2] = cSign;
+		} else if (board[2][2] == board[1][2] && board[1][2] == cSign && board[0][2] == 0) {
+			board[0][2] = cSign;
+		} else if (board[0][0] == board[1][1] && board[0][0] == cSign && board[2][2] == 0) {
+			board[2][2] = cSign;
+		} else if (board[0][0] == board[2][2] && board[0][0] == cSign && board[1][1] == 0) {
+			board[1][1] = cSign;
+		} else if (board[2][2] == board[1][1] && board[1][1] == cSign && board[0][0] == 0) {
+			board[0][0] = cSign;
+		} else if (board[0][2] == board[1][1] && board[1][1] == cSign && board[2][0] == 0) {
+			board[2][0] = cSign;
+		} else if (board[2][0] == board[2][0] && board[2][0] == cSign && board[1][1] == 0) {
+			board[1][1] = cSign;
+		} else if (board[2][0] == board[1][1] && board[2][0] == cSign && board[0][2] == 0) {
+			board[0][2] = cSign;
+		} else
+			System.out.println("Error!");
 	}
 }
