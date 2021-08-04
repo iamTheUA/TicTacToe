@@ -13,11 +13,32 @@ public class TicTacToe {
 	public static void main(String[] args) {
 		System.out.println("--Welcome to the Tic Tac Toe Game--");
 		createBoard();
-		firstSelect();
-		showBoard();
-		selectPosition();
+
 		showBoard();
 		turn = toss();
+		if (turn) {
+			System.out.println("Your Turn First");
+			firstSelect();
+			showBoard();
+		} else {
+			System.out.println("Computer's Turn First");
+			firstSelect();
+			showBoard();
+			toPlay=false;
+		}
+		while (turnLeft > 0) {
+			if (toPlay) {
+				selectPosition();
+				turnLeft--;
+				toPlay = false;
+				checkWin();
+			} else {
+				compMove();
+				turnLeft--;
+				toPlay = true;
+				checkWin();
+			}
+		}
 	}
 
 	public static void createBoard() {
@@ -128,18 +149,17 @@ public class TicTacToe {
 
 		if (turnLeft == 0) {
 			System.out.println("It's Tie");
-			toPlay = false;
 		}
 	}
 
 	public static void playerWon() {
 		System.out.println("You Won!!");
-		toPlay = false;
+		turnLeft=0;
 	}
 
 	public static void CompWon() {
 		System.out.println("Computer Won!!");
-		toPlay = false;
+		turnLeft=0;
 	}
 
 	public static void compMove() {
@@ -258,9 +278,7 @@ public class TicTacToe {
 			board[1][2] = cSign;
 		} else if (board[2][1] == 0) {
 			board[2][1] = cSign;
-		}
-
-		else
+		} else
 			System.out.println("Error!");
 	}
 }
