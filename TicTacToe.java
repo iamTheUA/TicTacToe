@@ -250,6 +250,14 @@ public class TicTacToe {
 			board[2][2] = cSign;
 		} else if (board[1][1] == 0) {
 			board[1][1] = cSign;
+		} else if (board[0][1] == 0) {
+			board[0][1] = cSign;
+		} else if (board[1][0] == 0) {
+			board[1][0] = cSign;
+		} else if (board[1][2] == 0) {
+			board[1][2] = cSign;
+		} else if (board[2][1] == 0) {
+			board[2][1] = cSign;
 		}
 
 		else
