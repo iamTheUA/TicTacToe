@@ -7,37 +7,54 @@ public class TicTacToe {
 
 	static int uSign, cSign;
 	static int turnLeft = 9;
+	static int nextGame = 0;
 	static boolean turn, toPlay = true;
 	static int board[][] = new int[3][3];
 
 	public static void main(String[] args) {
 		System.out.println("--Welcome to the Tic Tac Toe Game--");
-		createBoard();
+		do {
+			playing();
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Want to play More?");
+			System.out.println("Enter 1 for new match");
+			System.out.println("Enter 0 to Exit");
+			nextGame = sc.nextInt();
+		} while (nextGame == 1);
+	}
 
+	public static void playing() {
+		createBoard();
 		showBoard();
 		turn = toss();
 		if (turn) {
 			System.out.println("Your Turn First");
+			System.out.println();
 			firstSelect();
 			showBoard();
 		} else {
 			System.out.println("Computer's Turn First");
+			System.out.println();
 			firstSelect();
 			showBoard();
-			toPlay=false;
+			toPlay = false;
 		}
 		while (turnLeft > 0) {
 			if (toPlay) {
+				System.out.println();
+				System.out.println("----Your Turn----");
 				selectPosition();
-				turnLeft--;
 				toPlay = false;
-				checkWin();
 			} else {
+				System.out.println();
+				System.out.println("----Computer's Turn---- ");
 				compMove();
-				turnLeft--;
 				toPlay = true;
-				checkWin();
 			}
+			System.out.println();
+			showBoard();
+			turnLeft--;
+			checkWin();
 		}
 	}
 
@@ -53,10 +70,16 @@ public class TicTacToe {
 		System.out.println("Enter 1 for X or 2 for O :");
 		Scanner sc = new Scanner(System.in);
 		uSign = sc.nextInt();
+		if(uSign==1 || uSign==2) {
 		cSign = (uSign == 1) ? 2 : 1;
 		System.out.println("You Selected : " + ((uSign == 1) ? "X" : "O"));
 		System.out.println("Computer is : " + ((cSign == 1) ? "X" : "O"));
-		// sc.close();
+		System.out.println();
+		}
+		else {
+			System.out.println("Enter 1 or 2 only!");
+			firstSelect();
+		}
 	}
 
 	public static void showBoard() {
@@ -69,9 +92,20 @@ public class TicTacToe {
 
 	}
 
+	public static void showBoardInNumbers() {
+		System.out.println();
+		System.out.println("[1][1] | [1][2] | [1][3]");
+		System.out.println("-----------------------");
+		System.out.println("[2][1] | [2][2] | [2][3]");
+		System.out.println("------------------------");
+		System.out.println("[3][1] | [3][2] | [3][3]");
+		System.out.println("     [Row][Col]");
+	}
+
 	public static void selectPosition() {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter the Position--- ");
+		showBoardInNumbers();
+		System.out.println("----Enter the Position---- ");
 		System.out.println("Enter Row number: ");
 		int row = scan.nextInt() - 1;
 		System.out.println("Enter Column number: ");
@@ -80,10 +114,12 @@ public class TicTacToe {
 			if (board[row][col] == 0) {
 				board[row][col] = uSign;
 			} else {
-				System.out.println("Select Empty position!");
+				System.out.printf("Select Empty position!%n%n");
+				selectPosition();
 			}
 		} else {
-			System.out.println("Enter only 1,2,3 for Row and Column!");
+			System.out.printf("Enter only 1,2,3 for Row and Column!%n%n");
+			selectPosition();
 		}
 	}
 
@@ -108,58 +144,64 @@ public class TicTacToe {
 		if (board[0][0] == board[0][1] && board[0][0] == board[0][2]) {
 			if (board[0][0] == uSign) {
 				playerWon();
-			} else
+			} else if (board[0][0] == cSign)
 				CompWon();
 		} else if (board[1][0] == board[1][1] && board[1][0] == board[1][2]) {
 			if (board[1][0] == uSign) {
 				playerWon();
-			} else
+			} else if (board[1][0] == cSign)
 				CompWon();
 		} else if (board[2][0] == board[2][1] && board[2][0] == board[2][2]) {
 			if (board[2][0] == uSign) {
 				playerWon();
-			} else
+			} else if (board[2][0] == cSign)
 				CompWon();
 		} else if (board[0][0] == board[1][0] && board[0][0] == board[2][0]) {
 			if (board[0][0] == uSign) {
 				playerWon();
-			} else
+			} else if (board[0][0] == cSign)
 				CompWon();
 		} else if (board[1][1] == board[0][1] && board[0][1] == board[2][1]) {
 			if (board[1][1] == uSign) {
 				playerWon();
-			} else
+			} else if (board[1][1] == cSign)
 				CompWon();
 		} else if (board[0][2] == board[1][2] && board[0][2] == board[2][2]) {
 			if (board[0][2] == uSign) {
 				playerWon();
-			} else
+			} else if (board[0][2] == cSign)
 				CompWon();
 		} else if (board[0][0] == board[1][1] && board[0][0] == board[2][2]) {
 			if (board[0][0] == uSign) {
 				playerWon();
-			} else
+			} else if (board[0][0] == cSign)
 				CompWon();
 		} else if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
 			if (board[0][2] == uSign) {
 				playerWon();
-			} else
+			} else if (board[0][2] == cSign)
 				CompWon();
 		}
 
 		if (turnLeft == 0) {
+			System.out.println();
 			System.out.println("It's Tie");
+			showBoard();
 		}
 	}
 
 	public static void playerWon() {
+		System.out.println();
 		System.out.println("You Won!!");
-		turnLeft=0;
+		turnLeft = 0;
+		showBoard();
 	}
 
 	public static void CompWon() {
+		System.out.println();
 		System.out.println("Computer Won!!");
-		turnLeft=0;
+		turnLeft = 0;
+		showBoard();
 	}
 
 	public static void compMove() {
